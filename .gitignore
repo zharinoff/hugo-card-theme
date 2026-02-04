@@ -1,0 +1,15 @@
+# Hugo
+/resources/_gen/
+/public/
+/hugo_stats.json
+
+# Node.js
+/node_modules/
+npm-debug.log*
+
+# Tailwind
+.cache/
+/tmp/
+
+hugo-check*
+
