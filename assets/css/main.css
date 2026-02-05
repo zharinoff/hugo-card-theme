@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Кастомные компоненты */
+@layer components {
+    .btn {
+        @apply inline-block px-6 py-3 font-medium rounded-lg transition;
+    }
+    .btn-primary {
+        @apply bg-blue-600 text-white hover:bg-blue-700;
+    }
+    .btn-secondary {
+        @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+    }
+}
+

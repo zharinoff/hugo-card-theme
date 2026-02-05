@@ -1,0 +1,13 @@
+name = 'Hugo Card Theme'
+license = 'MIT'
+licenselink = 'https://github.com/zharinoff/hugo-card-theme/blob/main/LICENSE'
+decription = 'Минималистичная тема Hugo для сайтов-визиток'
+homepage = 'https://github.com/zharinoff/hugo-card-theme'
+tags = ['buisness', 'card', 'minimal', 'tailwind', 'russian']
+features = ['services', 'cases', 'blog', 'responsive', 'fast']
+min_version = '0.155.0'
+
+[author]
+  name = 'Maxim Zharinoff'
+  homepage = 'https://github.com/zharinoff'
+
