@@ -1,0 +1,68 @@
+<footer class="bg-stone-900 border-t border-stone-800 mt-auto">
+    <div class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-amber-400">{{- .Site.Title -}}</h3>
+                <p class="text-stone-400">{{- .Site.Params.copyright -}}</p>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="text-lg font-semibold text-stone-300">Контакты</h4>
+                <div class="space-y-2">
+                    {{- with .Site.Params.email -}}
+                    <a 
+                        href="mailto:{{ . }}" 
+                        class="block text-stone-400 hover:text-amber-400 transition-colors"
+                    >
+                        {{- . -}}
+                    </a>
+                    {{- end -}}
+                    {{- with .Site.Params.phone -}}
+                    <a 
+                        href="tel:{{ . }}" 
+                        class="block text-stone-400 hover:text-amber-400 transition-colors"
+                    >
+                        {{- . -}}
+                    </a>
+                    {{- end -}}
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <h4 class="text-lg font-semibold text-stone-300">Соцсети</h4>
+                <div class="flex flex-wrap gap-4">
+                    {{- with .Site.Params.telegram -}}
+                    <a 
+                        href="https://t.me/{{ . }}" 
+                        target="_blank"
+                        class="text-stone-400 hover:text-amber-400 transition-colors"
+                    >
+                        Telegram
+                    </a>
+                    {{- end -}}
+                    {{- with .Site.Params.github -}}
+                    <a 
+                        href="https://github.com/{{ . }}" 
+                        target="_blank"
+                        class="text-stone-400 hover:text-amber-400 transition-colors"
+                    >
+                        GitHub
+                    </a>
+                    {{- end -}}
+                    {{- with .Site.Params.vk -}}
+                    <a 
+                        href="https://vk.com/{{ . }}" 
+                        target="_blank"
+                        class="text-stone-400 hover:text-amber-400 transition-colors"
+                    >
+                        VK
+                    </a>
+                    {{- end -}}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+

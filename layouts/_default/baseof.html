@@ -1,17 +1,67 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<html lang="ru" class="scroll-smooth">
 <head>
-  {{ partial "head.html" . }}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+    
+    <meta property="og:title" content="{{ .Title | default .Site.Title }}">
+    <meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ .Permalink }}">
+    {{ with .Site.Params.openGraph.image }}
+    <meta property="og:image" content="{{ . | absURL }}">
+    {{ end }}
+    
+    <title>
+        {{- if .IsHome -}}
+            {{- .Site.Title -}}
+        {{- else -}}
+            {{- .Title }} | {{ .Site.Title -}}
+        {{- end -}}
+    </title>
+    
+    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | absURL }}">
+    
+    {{- block "head" . -}}{{- end -}}
 </head>
-<body>
-  <header>
-    {{ partial "header.html" . }}
-  </header>
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
+
+<body class="min-h-screen flex flex-col">
+    
+    {{- partial "header.html" . -}}
+    
+    <main class="flex-grow">
+        {{- block "main" . -}}{{- end -}}
+    </main>
+    
+    {{- partial "footer.html" . -}}
+    
+    {{- with .Site.Params.telegram -}}
+    <div class="fixed bottom-6 right-6 z-50">
+        <a 
+            href="https://t.me/{{ . }}" 
+            target="_blank"
+            class="
+                flex items-center justify-center
+                w-14 h-14
+                bg-gradient-to-br from-amber-500 to-amber-600
+                hover:from-amber-600 hover:to-amber-700
+                text-stone-900
+                rounded-full
+                shadow-lg shadow-stone-900/50
+                transition-all duration-300
+                hover:scale-110 hover:shadow-xl
+                focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-stone-800
+            "
+            aria-label="Написать в Telegram"
+        >
+            <span class="text-2xl font-bold tracking-tight">T</span>
+        </a>
+    </div>
+    {{- end -}}
+    
+    {{- block "scripts" . -}}{{- end -}}
 </body>
 </html>
+
