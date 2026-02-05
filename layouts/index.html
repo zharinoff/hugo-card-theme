@@ -1,0 +1,282 @@
+{{- define "main" -}}
+<div class="bg-stone-800">
+    
+    <!-- 1. Hero-секция -->
+    <section class="container mx-auto px-4 py-16 md:py-24">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-100 mb-6">
+                {{- .Site.Title -}}
+            </h1>
+            <p class="text-xl md:text-2xl text-stone-300 mb-10">
+                {{- .Site.Params.description | default "Профессиональные решения для вашего бизнеса" -}}
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                    href="/services/" 
+                    class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-8 py-4 rounded-lg transition-colors"
+                >
+                    Смотреть услуги
+                </a>
+                <a 
+                    href="/contact/" 
+                    class="inline-block bg-stone-700 hover:bg-stone-600 text-stone-100 font-semibold px-8 py-4 rounded-lg transition-colors border border-stone-600"
+                >
+                    Написать
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2. Блок услуг -->
+    {{- $services := where .Site.RegularPages "Section" "services" | first 4 -}}
+    {{- if $services -}}
+    <section class="bg-stone-700 py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">
+                    Ключевые услуги
+                </h2>
+                <p class="text-lg text-stone-300 max-w-2xl mx-auto">
+                    Проверенные решения для роста вашего бизнеса
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {{- range $services -}}
+                <article class="bg-stone-800 rounded-xl border border-stone-700 p-6 hover:border-amber-500/30 transition-colors">
+                    <h3 class="text-xl font-bold text-stone-100 mb-3">
+                        <a href="{{ .RelPermalink }}" class="hover:text-amber-400 transition-colors">
+                            {{- .Title -}}
+                        </a>
+                    </h3>
+                    {{- with .Params.subtitle -}}
+                    <p class="text-stone-400 mb-4">{{ . }}</p>
+                    {{- end -}}
+                    {{- if or .Params.price .Params.duration -}}
+                    <div class="space-y-2 mb-4">
+                        {{- with .Params.price -}}
+                        <p class="text-emerald-400 font-semibold">{{ . }}</p>
+                        {{- end -}}
+                        {{- with .Params.duration -}}
+                        <p class="text-stone-500 text-sm">{{ . }}</p>
+                        {{- end -}}
+                    </div>
+                    {{- end -}}
+                    <a 
+                        href="{{ .RelPermalink }}" 
+                        class="inline-block text-amber-400 hover:text-amber-300 font-medium text-sm"
+                    >
+                        Подробнее
+                    </a>
+                </article>
+                {{- end -}}
+            </div>
+            
+            <div class="text-center mt-10">
+                <a 
+                    href="/services/" 
+                    class="inline-block text-stone-300 hover:text-amber-400 transition-colors font-medium"
+                >
+                    Все услуги
+                </a>
+            </div>
+        </div>
+    </section>
+    {{- end -}}
+    
+    <!-- 3. Кейс-пример -->
+    {{- $featuredCase := where .Site.RegularPages "Section" "cases" "Params.featured" true | first 1 -}}
+    {{- if $featuredCase -}}
+    {{- with index $featuredCase 0 -}}
+    <section class="container mx-auto px-4 py-16">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">
+                    Пример работы
+                </h2>
+                <p class="text-lg text-stone-300">
+                    Реальный проект с измеримыми результатами
+                </p>
+            </div>
+            
+            <article class="bg-stone-700 rounded-xl border border-stone-600 p-8">
+                <div class="mb-6">
+                    <span class="inline-block bg-amber-500/10 text-amber-400 px-4 py-1 rounded-full text-sm font-medium">
+                        Кейс
+                    </span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-stone-100 mb-4">
+                    {{- .Title -}}
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    {{- with .Params.client -}}
+                    <div>
+                        <p class="text-stone-400 text-sm mb-1">Клиент</p>
+                        <p class="text-stone-100 font-medium">{{ . }}</p>
+                    </div>
+                    {{- end -}}
+                    {{- with .Params.period -}}
+                    <div>
+                        <p class="text-stone-400 text-sm mb-1">Период</p>
+                        <p class="text-stone-100 font-medium">{{ . }}</p>
+                    </div>
+                    {{- end -}}
+                    {{- with .Params.results -}}
+                    <div>
+                        <p class="text-stone-400 text-sm mb-1">Результат</p>
+                        <p class="text-emerald-400 font-medium">{{ . }}</p>
+                    </div>
+                    {{- end -}}
+                </div>
+                
+                {{- if .Params.problem -}}
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-stone-300 mb-2">Проблема</h4>
+                    <p class="text-stone-400">{{ .Params.problem }}</p>
+                </div>
+                {{- end -}}
+                
+                {{- if .Params.solution -}}
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-stone-300 mb-2">Решение</h4>
+                    <p class="text-stone-400">{{ .Params.solution }}</p>
+                </div>
+                {{- end -}}
+                
+                <div class="text-center mt-8">
+                    <a 
+                        href="{{ .RelPermalink }}" 
+                        class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-6 py-3 rounded-lg transition-colors"
+                    >
+                        Подробнее о кейсе
+                    </a>
+                </div>
+            </article>
+        </div>
+    </section>
+    {{- end -}}
+    {{- end -}}
+    
+    <!-- 4. Обо мне (кратко) -->
+    {{- $about := .Site.GetPage "about" -}}
+    {{- if $about -}}
+    <section class="bg-stone-700 py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-6">
+                        {{- $about.Title -}}
+                    </h2>
+                    <div class="prose prose-invert max-w-none">
+                        <div class="text-stone-300">
+                            {{- $about.Content | truncate 300 -}}
+                        </div>
+                    </div>
+                    {{- if $about.Params.experience -}}
+                    <div class="mt-6">
+                        <p class="text-stone-400 mb-2">Опыт работы</p>
+                        <p class="text-2xl font-bold text-emerald-400">{{ $about.Params.experience }}</p>
+                    </div>
+                    {{- end -}}
+                    <div class="mt-8">
+                        <a 
+                            href="{{ $about.RelPermalink }}" 
+                            class="inline-block text-amber-400 hover:text-amber-300 font-medium"
+                        >
+                            Подробнее обо мне
+                        </a>
+                    </div>
+                </div>
+                {{- if $about.Params.photo -}}
+                <div class="relative">
+                    <div class="aspect-square bg-stone-600 rounded-xl overflow-hidden">
+                        <!-- Фото будет через background-image в CSS -->
+                    </div>
+                </div>
+                {{- end -}}
+            </div>
+        </div>
+    </section>
+    {{- end -}}
+    
+    <!-- 5. Процесс работы -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">
+                Как мы работаем
+            </h2>
+            <p class="text-lg text-stone-300 max-w-2xl mx-auto">
+                Чёткий процесс от обсуждения до результата
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <span class="text-amber-400 font-bold text-xl">1</span>
+                </div>
+                <h3 class="text-xl font-semibold text-stone-100 mb-2">Обсуждение</h3>
+                <p class="text-stone-400">Погружаемся в задачу, анализируем цели</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <span class="text-amber-400 font-bold text-xl">2</span>
+                </div>
+                <h3 class="text-xl font-semibold text-stone-100 mb-2">План</h3>
+                <p class="text-stone-400">Разрабатываем решение и утверждаем сроки</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <span class="text-amber-400 font-bold text-xl">3</span>
+                </div>
+                <h3 class="text-xl font-semibold text-stone-100 mb-2">Реализация</h3>
+                <p class="text-stone-400">Работаем по утверждённому плану</p>
+            </div>
+            
+            <div class="text-center">
+                <div class="w-12 h-12 bg-amber-500/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <span class="text-amber-400 font-bold text-xl">4</span>
+                </div>
+                <h3 class="text-xl font-semibold text-stone-100 mb-2">Результат</h3>
+                <p class="text-stone-400">Сдаём работу и поддерживаем</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 6. Финальный CTA -->
+    <section class="bg-stone-700 py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-6">
+                    Готовы обсудить проект?
+                </h2>
+                <p class="text-xl text-stone-300 mb-10">
+                    Оставьте заявку или напишите напрямую в Telegram
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a 
+                        href="/contact/" 
+                        class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-8 py-4 rounded-lg transition-colors"
+                    >
+                        Оставить заявку
+                    </a>
+                    {{- with .Site.Params.telegram -}}
+                    <a 
+                        href="https://t.me/{{ . }}" 
+                        target="_blank"
+                        class="inline-block bg-stone-800 hover:bg-stone-700 text-stone-100 font-semibold px-8 py-4 rounded-lg transition-colors border border-stone-600"
+                    >
+                        Написать в Telegram
+                    </a>
+                    {{- end -}}
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</div>
+{{- end -}}
