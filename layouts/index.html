@@ -85,7 +85,8 @@
     {{- end -}}
     
     <!-- 3. Кейс-пример -->
-    {{- $featuredCase := where .Site.RegularPages "Section" "cases" "Params.featured" true | first 1 -}}
+    {{- $allCases := where .Site.RegularPages "Section" "cases" -}}
+    {{- $featuredCase := where $allCases "Params.featured" true | first 1 -}}
     {{- if $featuredCase -}}
     {{- with index $featuredCase 0 -}}
     <section class="container mx-auto px-4 py-16">
@@ -169,10 +170,8 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-6">
                         {{- $about.Title -}}
                     </h2>
-                    <div class="prose prose-invert max-w-none">
-                        <div class="text-stone-300">
-                            {{- $about.Content | truncate 300 -}}
-                        </div>
+                    <div class="text-stone-300">
+                        {{- $about.Content | plainify | truncate 300 -}}
                     </div>
                     {{- if $about.Params.experience -}}
                     <div class="mt-6">
@@ -189,13 +188,6 @@
                         </a>
                     </div>
                 </div>
-                {{- if $about.Params.photo -}}
-                <div class="relative">
-                    <div class="aspect-square bg-stone-600 rounded-xl overflow-hidden">
-                        <!-- Фото будет через background-image в CSS -->
-                    </div>
-                </div>
-                {{- end -}}
             </div>
         </div>
     </section>
@@ -280,3 +272,4 @@
     
 </div>
 {{- end -}}
+
