@@ -7,7 +7,7 @@
                     
                     {{- with .Site.Params.logo.image -}}
                     <img 
-                        src="{{ . | absURL }}" 
+                        src="{{ . | relURL }}" 
                         alt="{{ $.Site.Params.logo.text | default $.Site.Title }}"
                         class="h-8 w-auto md:h-10"
                     >
