@@ -1,23 +1,45 @@
 <header class="bg-stone-900 border-b border-stone-800 sticky top-0 z-40">
     <div class="container mx-auto px-3 md:px-4 py-2 md:py-4">
         <nav class="flex flex-col md:flex-row justify-between items-center">
-            <a 
-                href="/" 
-                class="text-1xl md:text-2xl font-bold text-amber-400 hover:text-amber-300 transition-colors mb-4 md:mb-0"
-            >
-                {{- .Site.Params.logo.text | default .Site.Title -}}
-            </a>
             
+            <!-- Логотип + название -->
+            <div class="flex items-center gap-3 mb-2 md:mb-0">
+                <a href="/" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                    
+                    {{- with .Site.Params.logo.image -}}
+                    <!-- Изображение логотипа -->
+                    <img 
+                        src="{{ . | absURL }}" 
+                        alt="{{ $.Site.Params.logo.text | default $.Site.Title }}"
+                        class="h-8 w-auto md:h-10"  <!-- Размеры адаптивные -->
+                    >
+                    {{- end -}}
+                    
+                    <!-- Название сайта (рядом с логотипом) -->
+                    <span class="
+                        text-xl md:text-2xl 
+                        font-bold 
+                        text-amber-400
+                        hidden sm:block  <!-- На очень маленьких экранах скрываем -->
+                    ">
+                        {{- .Site.Params.logo.text | default .Site.Title -}}
+                    </span>
+                    
+                </a>
+            </div>
+            
+            <!-- Навигация -->
             <div class="flex flex-wrap justify-center gap-1 md:gap-8">
                 {{- range .Site.Menus.main -}}
                 <a 
                     href="{{ .URL }}" 
-                    class="text-sm md:text-base text-stone-300 hover:text-amber-400 transition-colors px-2 md:px-3 py-1 md:py-2 rounded-lg hover:bg-stone-800"
+                    class="text-sm md:text-base text-stone-300 hover:text-amber-400 transition-colors px-2 py-1 md:px-3 md:py-2 rounded hover:bg-stone-800"
                 >
                     {{- .Name -}}
                 </a>
                 {{- end -}}
             </div>
+            
         </nav>
     </div>
 </header>
