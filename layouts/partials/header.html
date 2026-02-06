@@ -2,33 +2,24 @@
     <div class="container mx-auto px-3 md:px-4 py-2 md:py-4">
         <nav class="flex flex-col md:flex-row justify-between items-center">
             
-            <!-- Логотип + название -->
             <div class="flex items-center gap-3 mb-2 md:mb-0">
                 <a href="/" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
                     
                     {{- with .Site.Params.logo.image -}}
-                    <!-- Изображение логотипа -->
                     <img 
                         src="{{ . | absURL }}" 
                         alt="{{ $.Site.Params.logo.text | default $.Site.Title }}"
-                        class="h-8 w-auto md:h-10"  <!-- Размеры адаптивные -->
+                        class="h-8 w-auto md:h-10"
                     >
                     {{- end -}}
                     
-                    <!-- Название сайта (рядом с логотипом) -->
-                    <span class="
-                        text-xl md:text-2xl 
-                        font-bold 
-                        text-amber-400
-                        hidden sm:block  <!-- На очень маленьких экранах скрываем -->
-                    ">
+                    <span class="text-xl md:text-2xl font-bold text-amber-400 hidden sm:block">
                         {{- .Site.Params.logo.text | default .Site.Title -}}
                     </span>
                     
                 </a>
             </div>
             
-            <!-- Навигация -->
             <div class="flex flex-wrap justify-center gap-1 md:gap-8">
                 {{- range .Site.Menus.main -}}
                 <a 
