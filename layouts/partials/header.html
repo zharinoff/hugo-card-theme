@@ -7,14 +7,14 @@
                     
                     {{- with .Site.Params.logo.image -}}
                     <img 
-                        src="{{ . | relURL }}" 
+                        src="{{ . | absURL }}" 
                         alt="{{ $.Site.Params.logo.text | default $.Site.Title }}"
                         class="h-8 w-auto md:h-10"
                     >
                     {{- end -}}
                     
                     <span class="text-xl md:text-2xl font-bold text-amber-400 hidden sm:block">
-                        {{- .Site.Params.logo.text | default .Site.Title -}}
+                        {{- .Site.Title -}}
                     </span>
                     
                 </a>
