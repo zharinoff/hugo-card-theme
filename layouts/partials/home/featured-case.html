@@ -1,0 +1,74 @@
+{{- $allCases := where .Site.RegularPages "Section" "cases" -}}
+{{- $featuredCase := where $allCases "Params.featured" true | first 1 -}}
+{{- if $featuredCase -}}
+{{- with index $featuredCase 0 -}}
+<section class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">
+                Пример работы
+            </h2>
+            <p class="text-lg text-stone-300">
+                Реальный проект с измеримыми результатами
+            </p>
+        </div>
+        
+        <article class="bg-stone-700 rounded-xl border border-stone-600 p-8">
+            <div class="mb-6">
+                <span class="inline-block bg-amber-500/10 text-amber-400 px-4 py-1 rounded-full text-sm font-medium">
+                    Кейс
+                </span>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-stone-100 mb-4">
+                {{- .Title -}}
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {{- with .Params.client -}}
+                <div>
+                    <p class="text-stone-400 text-sm mb-1">Клиент</p>
+                    <p class="text-stone-100 font-medium">{{ . }}</p>
+                </div>
+                {{- end -}}
+                {{- with .Params.period -}}
+                <div>
+                    <p class="text-stone-400 text-sm mb-1">Период</p>
+                    <p class="text-stone-100 font-medium">{{ . }}</p>
+                </div>
+                {{- end -}}
+                {{- with .Params.results -}}
+                <div>
+                    <p class="text-stone-400 text-sm mb-1">Результат</p>
+                    <p class="text-emerald-400 font-medium">{{ . }}</p>
+                </div>
+                {{- end -}}
+            </div>
+            
+            {{- if .Params.problem -}}
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-stone-300 mb-2">Проблема</h4>
+                <p class="text-stone-400">{{ .Params.problem }}</p>
+            </div>
+            {{- end -}}
+            
+            {{- if .Params.solution -}}
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-stone-300 mb-2">Решение</h4>
+                <p class="text-stone-400">{{ .Params.solution }}</p>
+            </div>
+            {{- end -}}
+            
+            <div class="text-center mt-8">
+                <a 
+                    href="{{ .RelPermalink }}" 
+                    class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-6 py-3 rounded-lg transition-colors"
+                >
+                    Подробнее о кейсе
+                </a>
+            </div>
+        </article>
+    </div>
+</section>
+{{- end -}}
+{{- end -}}

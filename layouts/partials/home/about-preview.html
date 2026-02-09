@@ -1,0 +1,31 @@
+{{- $about := .Site.GetPage "about" -}}
+{{- if $about -}}
+<section class="bg-stone-700 py-16">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-6">
+                    {{- $about.Title -}}
+                </h2>
+                <div class="text-stone-300">
+                    {{- $about.Content | plainify | truncate 300 -}}
+                </div>
+                {{- if $about.Params.experience -}}
+                <div class="mt-6">
+                    <p class="text-stone-400 mb-2">Опыт работы</p>
+                    <p class="text-2xl font-bold text-emerald-400">{{ $about.Params.experience }}</p>
+                </div>
+                {{- end -}}
+                <div class="mt-8">
+                    <a 
+                        href="{{ $about.RelPermalink }}" 
+                        class="inline-block text-amber-400 hover:text-amber-300 font-medium"
+                    >
+                        Подробнее обо мне
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{{- end -}}

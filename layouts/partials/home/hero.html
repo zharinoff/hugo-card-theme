@@ -1,0 +1,36 @@
+{{- $title := .title -}}
+{{- $description := .description -}}
+{{- $primaryCTA := .primaryCTA -}}
+{{- $secondaryCTA := .secondaryCTA -}}
+
+<section class="container mx-auto px-4 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-stone-100 mb-6">
+            {{- $title -}}
+        </h1>
+        {{- with $description -}}
+        <p class="text-xl md:text-2xl text-stone-300 mb-10">
+            {{- . -}}
+        </p>
+        {{- end -}}
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {{- with $primaryCTA -}}
+            <a 
+                href="{{ .url }}" 
+                class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-8 py-4 rounded-lg transition-colors"
+            >
+                {{- .text -}}
+            </a>
+            {{- end -}}
+            {{- with $secondaryCTA -}}
+            <a 
+                href="{{ .url }}" 
+                class="inline-block bg-stone-700 hover:bg-stone-600 text-stone-100 font-semibold px-8 py-4 rounded-lg transition-colors border border-stone-600"
+            >
+                {{- .text -}}
+            </a>
+            {{- end -}}
+        </div>
+    </div>
+</section>
+
