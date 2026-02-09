@@ -3,7 +3,8 @@
         <nav class="flex flex-col md:flex-row justify-between items-center">
             
             <div class="flex items-center gap-3 mb-2 md:mb-0">
-                <a href="{{ .Site.Home.RelPermalink }}" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                {{ $home := "/" }}
+                <a href="{{ $home | absURL }}" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
                     
                     {{- with .Site.Params.logo.image -}}
                     <img 
