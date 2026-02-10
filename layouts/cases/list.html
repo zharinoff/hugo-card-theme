@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="bg-stone-800 min-h-screen">
+    
+    {{ partial "cases/list-hero.html" . }}
+    
+    <section class="container mx-auto px-4 py-12">
+        {{ if .Pages }}
+            {{ partial "cases/list-grid.html" . }}
+        {{ else }}
+            {{ partial "cases/list-empty.html" . }}
+        {{ end }}
+    </section>
+    
+    {{ partial "cta.html" (dict
+        "title" "Хотите похожий результат?"
+        "description" "Расскажите о своём проекте, и мы предложим решение"
+        "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+    
+</div>
+{{ end }}

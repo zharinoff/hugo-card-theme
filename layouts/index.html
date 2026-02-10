@@ -2,9 +2,9 @@
 <div class="bg-stone-800">
     {{ partial "home/hero.html" (dict
         "title" .Site.Title
-        "description" (.Site.Params.description | default "Профессиональные решения для вашего бизнеса")
-        "primaryCTA" (dict "text" "Смотреть услуги" "url" ("/services/" | relURL))
-        "secondaryCTA" (dict "text" "Написать" "url" ("/contact/" | relURL))
+        "description" (.Site.Params.description | default "Дефолтное описание сайта")
+        "primaryCTA" (dict "text" "Смотреть услуги" "url" ("services/" | relURL))
+        "secondaryCTA" (dict "text" "Написать" "url" ("contacts/" | relURL))
     ) }}
     
     {{ partial "home/services-preview.html" . }}
@@ -18,7 +18,7 @@
     {{ partial "cta.html" (dict
         "title" "Готовы обсудить проект?"
         "description" "Оставьте заявку или напишите напрямую в Telegram"
-        "primaryCTA" (dict "text" "Оставить заявку" "url" ("/contact/" | relURL))
+        "primaryCTA" (dict "text" "Оставить заявку" "url" ("contacts/" | relURL))
         "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
     ) }}
 </div>

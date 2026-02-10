@@ -1,0 +1,132 @@
+{{- $page := . -}}
+
+{{ $featuredCases := where .Pages "Params.featured" true }}
+{{ $regularCases := where .Pages "Params.featured" "!=" true }}
+
+<!-- Featured кейсы (если есть) -->
+{{ if $featuredCases }}
+<div class="mb-12">
+    <h2 class="text-2xl md:text-3xl font-bold text-stone-100 mb-8">
+        Рекомендуемые кейсы
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {{ range first 2 $featuredCases }}
+        <article class="bg-stone-900 rounded-xl border-2 border-amber-500/30 p-8 hover:border-amber-500/50 transition-all hover:shadow-xl">
+            <div class="mb-4">
+                <span class="inline-block bg-amber-500/20 text-amber-400 px-4 py-1 rounded-full text-sm font-medium">
+                    Рекомендуем
+                </span>
+            </div>
+            
+            <h2 class="text-xl md:text-2xl font-bold text-stone-100 mb-4">
+                <a href="{{ .RelPermalink }}" class="hover:text-amber-400 transition-colors">
+                    {{ .Title }}
+                </a>
+            </h2>
+            
+            {{ with .Params.client }}
+            <p class="text-stone-400 mb-3">Для <span class="text-stone-300 font-medium">{{ . }}</span></p>
+            {{ end }}
+            
+            {{ with .Params.results }}
+            <div class="mb-6">
+                <p class="text-stone-500 text-sm mb-1">Результат</p>
+                <p class="text-emerald-400 font-bold">{{ . }}</p>
+            </div>
+            {{ end }}
+            
+            <a 
+                href="{{ .RelPermalink }}" 
+                class="inline-block bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-6 py-3 rounded-lg transition-colors text-sm"
+            >
+                Изучить кейс
+            </a>
+        </article>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
+
+<!-- Все кейсы -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {{ range $regularCases }}
+    <article class="bg-stone-900 rounded-xl border border-stone-700 p-6 hover:border-amber-500/30 transition-all hover:shadow-xl">
+        
+        <h2 class="text-xl md:text-2xl font-bold text-stone-100 mb-4">
+            <a href="{{ .RelPermalink }}" class="hover:text-amber-400 transition-colors">
+                {{ .Title }}
+            </a>
+        </h2>
+        
+        <!-- Клиент и период -->
+        <div class="space-y-2 mb-4">
+            {{ with .Params.client }}
+            <div>
+                <p class="text-stone-500 text-sm">Клиент</p>
+                <p class="text-stone-300 font-medium">{{ . }}</p>
+            </div>
+            {{ end }}
+            
+            {{ with .Params.period }}
+            <div>
+                <p class="text-stone-500 text-sm">Период</p>
+                <p class="text-stone-400">{{ . }}</p>
+            </div>
+            {{ end }}
+        </div>
+        
+        <!-- Результаты -->
+        {{ with .Params.results }}
+        <div class="mb-6">
+            <p class="text-stone-500 text-sm mb-1">Результат</p>
+            <p class="text-emerald-400 font-bold text-sm">{{ . }}</p>
+        </div>
+        {{ end }}
+        
+        <!-- Краткое описание проблемы -->
+        {{ with .Params.problem }}
+        <p class="text-stone-500 text-sm mb-6 line-clamp-3">
+            {{ . | plainify | truncate 120 }}
+        </p>
+        {{ end }}
+        
+        <!-- Ссылка -->
+        <div class="flex justify-between items-center">
+            <a 
+                href="{{ .RelPermalink }}" 
+                class="text-amber-400 hover:text-amber-300 font-medium text-sm"
+            >
+                Подробнее →
+            </a>
+            
+            {{ if .Params.featured }}
+            <span class="text-amber-400 text-sm">★</span>
+            {{ end }}
+        </div>
+        
+    </article>
+    {{ end }}
+</div>
+
+<!-- Pagination -->
+{{ if gt $page.Paginator.TotalPages 1 }}
+<div class="mt-12 pt-8 border-t border-stone-700">
+    <nav class="flex justify-center space-x-4">
+        {{ if $page.Paginator.HasPrev }}
+        <a href="{{ $page.Paginator.Prev.URL }}" class="text-stone-400 hover:text-amber-400">
+            ← Назад
+        </a>
+        {{ end }}
+        
+        <span class="text-stone-500">
+            Страница {{ $page.Paginator.PageNumber }} из {{ $page.Paginator.TotalPages }}
+        </span>
+        
+        {{ if $page.Paginator.HasNext }}
+        <a href="{{ $page.Paginator.Next.URL }}" class="text-stone-400 hover:text-amber-400">
+            Вперёд →
+        </a>
+        {{ end }}
+    </nav>
+</div>
+{{ end }}

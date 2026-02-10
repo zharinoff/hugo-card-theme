@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="bg-stone-800 min-h-screen">
+    
+    {{ partial "cases/hero.html" . }}
+    
+    <section class="container mx-auto px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            
+            {{ partial "cases/metrics.html" . }}
+            {{ partial "cases/content.html" . }}
+            
+            {{ with .Params.testimonial }}
+            {{ partial "cases/testimonial.html" . }}
+            {{ end }}
+            
+            {{ with .Params.faq }}
+            {{ partial "faq.html" (dict "faqItems" . "title" "Вопросы по проекту") }}
+            {{ end }}
+            
+            <!-- CTA с предложением услуг -->
+            {{ $relatedServices := where .Site.RegularPages "Section" "services" | first 2 }}
+            {{ if $relatedServices }}
+            <div class="bg-stone-900 rounded-xl border border-stone-700 p-8 mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-stone-100 mb-6">
+                    Похожие услуги
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{ range $relatedServices }}
+                    <div class="bg-stone-800 rounded-lg p-6 border border-stone-600">
+                        <h3 class="text-xl font-semibold text-stone-100 mb-3">
+                            <a href="{{ .RelPermalink }}" class="hover:text-amber-400">
+                                {{ .Title }}
+                            </a>
+                        </h3>
+                        {{ with .Params.subtitle }}
+                        <p class="text-stone-400 text-sm mb-3">{{ . }}</p>
+                        {{ end }}
+                        {{ with .Params.price }}
+                        <p class="text-emerald-400 font-medium">{{ . }}</p>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            
+            {{ partial "cta.html" (dict
+                "title" "Хотите такой же результат?"
+                "description" "Опишите вашу задачу, и мы предложим решение"
+                "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
+                "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+            ) }}
+            
+        </div>
+    </section>
+    
+</div>
+{{ end }}
