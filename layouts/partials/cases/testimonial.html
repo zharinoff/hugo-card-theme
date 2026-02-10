@@ -1,4 +1,7 @@
-{{- $testimonial := . -}}
+{{- $case := .context -}}
+{{- $testimonial := .testimonial -}}
+{{- $client := .client | default $case.Params.client -}}
+{{- $period := .period | default $case.Params.period -}}
 
 <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-8 mb-12">
     <div class="flex items-start">
@@ -11,10 +14,10 @@
                 <div class="w-10 h-10 bg-stone-700 rounded-full mr-3"></div>
                 <div>
                     <p class="text-stone-100 font-medium">
-                        {{ $.Params.client | default "Клиент" }}
+                        {{ $client | default "Клиент" }}
                     </p>
                     <p class="text-stone-400 text-sm">
-                        {{ $.Params.period | default "После завершения проекта" }}
+                        {{ $period | default "После завершения проекта" }}
                     </p>
                 </div>
             </div>

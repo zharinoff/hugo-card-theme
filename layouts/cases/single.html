@@ -10,7 +10,10 @@
             {{ partial "cases/content.html" . }}
             
             {{ with .Params.testimonial }}
-            {{ partial "cases/testimonial.html" . }}
+            {{ partial "cases/testimonial.html" (dict
+              "testimonial" .
+              "context" $
+            ) }}
             {{ end }}
             
             {{ with .Params.faq }}
