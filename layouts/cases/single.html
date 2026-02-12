@@ -1,34 +1,40 @@
 {{ define "main" }}
-<div class="min-h-screen">
+<div class="min-h-screen bg-stone-800">
     
-    {{ partial "cases/hero.html" . }}
-    
-    <section class="container bg-stone-700 mx-auto px-4 py-12">
-        <div class="max-w-4xl mx-auto">
-            
-            {{ partial "cases/metrics.html" . }}
-            {{ partial "cases/content.html" . }}
-            
-            {{ with .Params.testimonial }}
-            {{ partial "cases/testimonial.html" (dict
-              "testimonial" .
-              "context" $
-            ) }}
-            {{ end }}
-            
-            {{ with .Params.faq }}
-            {{ partial "faq.html" (dict "faqItems" . "title" "Вопросы по проекту") }}
-            {{ end }}
-            
-            {{ partial "cta.html" (dict
-                "title" "Хотите такой же результат?"
-                "description" "Опишите вашу задачу, и мы предложим решение"
-                "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
-                "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
-            ) }}
-            
+    <!-- СЕКЦИЯ 1: ГЕРОЙ -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                {{ partial "cases/hero.html" . }}
+            </div>
         </div>
     </section>
-    
+
+    <!-- СЕКЦИЯ 2: КОНТЕНТ (фон stone-700, карточки внутри) -->
+    <section class="bg-stone-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto space-y-12">
+                {{ partial "cases/metrics.html" . }}
+                {{ partial "cases/content.html" . }}
+                
+                {{ with .Params.testimonial }}
+                    {{ partial "cases/testimonial.html" $ }}
+                {{ end }}
+                
+                {{ with .Params.faq }}
+                    {{ partial "faq.html" (dict "faqItems" . "title" "Вопросы по проекту") }}
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: CTA (самодостаточный partial, НЕ оборачиваем) -->
+    {{ partial "cta.html" (dict 
+        "title" "Хотите такой же результат?"
+        "description" "Опишите вашу задачу, и мы предложим решение"
+        "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+
 </div>
 {{ end }}

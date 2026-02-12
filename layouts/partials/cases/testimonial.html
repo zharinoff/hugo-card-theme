@@ -1,23 +1,20 @@
-{{- $case := .context -}}
-{{- $testimonial := .testimonial -}}
-{{- $client := .client | default $case.Params.client -}}
-{{- $period := .period | default $case.Params.period -}}
-
-<div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-8 mb-12">
+{{- $case := . -}}
+{{- with $case.Params.testimonial -}}
+<div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-8">
     <div class="flex items-start">
         <div class="mr-4 text-amber-400 text-2xl">"</div>
         <div class="flex-grow">
             <p class="text-stone-300 text-lg italic mb-4">
-                {{ $testimonial }}
+                {{ . | markdownify }}
             </p>
             <div class="flex items-center">
                 <div class="w-10 h-10 bg-stone-700 rounded-full mr-3"></div>
                 <div>
                     <p class="text-stone-100 font-medium">
-                        {{ $client | default "Клиент" }}
+                        {{ $case.Params.client | default "Клиент" }}
                     </p>
                     <p class="text-stone-400 text-sm">
-                        {{ $period | default "После завершения проекта" }}
+                        {{ $case.Params.period | default "После завершения проекта" }}
                     </p>
                 </div>
             </div>
@@ -25,3 +22,4 @@
         <div class="text-amber-400 text-2xl self-end">"</div>
     </div>
 </div>
+{{- end -}}
