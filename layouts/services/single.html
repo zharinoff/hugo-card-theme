@@ -1,28 +1,35 @@
 {{ define "main" }}
 <div class="bg-stone-800 min-h-screen">
     
-    {{ partial "services/hero.html" . }}
-    
-    <section class="container mx-auto px-4 py-12">
-        <div class="max-w-4xl mx-auto">
-            
-            {{ partial "services/content.html" . }}
-            {{ partial "services/features.html" . }}
-            {{ partial "services/process.html" . }}
-            
-            {{ with .Params.faq }}
-            {{ partial "faq.html" (dict "faqItems" .) }}
-            {{ end }}
-            
-            {{ partial "cta.html" (dict
-                "title" "Готовы начать?"
-                "description" "Оставьте заявку, и мы обсудим детали вашего проекта"
-                "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
-                "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
-            ) }}
-            
+    <!-- СЕКЦИЯ 1: ГЕРОЙ (наследует bg-stone-800) -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            {{ partial "services/hero.html" . }}
         </div>
     </section>
-    
+
+    <!-- СЕКЦИЯ 2: КОНТЕНТ (смена фона на stone-700) -->
+    <section class="bg-stone-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto space-y-12">
+                {{ partial "services/content.html" . }}
+                {{ partial "services/features.html" . }}
+                {{ partial "services/process.html" . }}
+                
+                {{ with .Params.faq }}
+                {{ partial "faq.html" (dict "faqItems" .) }}
+                {{ end }}
+            </div>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ 3: CTA (самодостаточный) -->
+    {{ partial "cta.html" (dict
+        "title" "Готовы начать?"
+        "description" "Оставьте заявку, и мы обсудим детали вашего проекта"
+        "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+
 </div>
 {{ end }}

@@ -1,7 +1,8 @@
 {{- $service := . -}}
-
-<div class="prose prose-lg prose-invert max-w-none mb-12">
+{{ with $service.Content }}
+<div class="prose prose-lg prose-invert max-w-none">
     <div class="text-stone-300 leading-relaxed">
-        {{ $service.Content }}
+        {{ . }}
     </div>
 </div>
+{{ end }}
