@@ -14,7 +14,7 @@
     {{ partial "cta.html" (dict
         "title" "Не нашли нужную услугу?"
         "description" "Расскажите о своей задаче, и мы предложим решение"
-        "primaryCTA" (dict "text" "Обсудить проект" "url" ("/contact/" | relURL))
+        "primaryCTA" (dict "text" "Обсудить проект" "url" ("contacts/" | relURL))
         "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
     ) }}
     
