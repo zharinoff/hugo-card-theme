@@ -1,0 +1,31 @@
+{{- $service := . -}}
+
+<a href="{{ $service.RelPermalink }}" class="block bg-stone-800 rounded-xl border border-stone-600 p-6 hover:border-amber-500 transition-colors no-underline h-full flex flex-col">
+    
+    <!-- Заголовок -->
+    <h3 class="text-xl font-bold text-stone-100 mb-3 group-hover:text-amber-400 transition-colors">
+        {{ $service.Title }}
+    </h3>
+    
+    <!-- Подзаголовок (если есть) -->
+    {{ with $service.Params.subtitle }}
+    <p class="text-stone-400 text-sm mb-4">
+        {{ . }}
+    </p>
+    {{ end }}
+    
+    <!-- Цена и сроки -->
+    <div class="mt-auto pt-4">
+        {{ with $service.Params.price }}
+        <p class="text-emerald-400 font-semibold text-lg mb-1">
+            {{ . }}
+        </p>
+        {{ end }}
+        {{ with $service.Params.duration }}
+        <p class="text-stone-500 text-sm">
+            {{ . }}
+        </p>
+        {{ end }}
+    </div>
+    
+</a>

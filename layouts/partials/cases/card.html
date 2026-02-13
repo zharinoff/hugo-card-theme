@@ -1,0 +1,45 @@
+{{- $case := . -}}
+
+<a href="{{ $case.RelPermalink }}" class="block bg-stone-800 rounded-xl border border-stone-600 p-6 hover:border-amber-500 transition-colors no-underline">
+    
+    <!-- Метка "Кейс" или "Избранное" -->
+    <div class="flex items-center gap-2 mb-4">
+        <span class="inline-block bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full text-xs font-medium">
+            Кейс
+        </span>
+        {{ if $case.Params.featured }}
+        <span class="inline-block bg-amber-500 text-stone-900 px-3 py-1 rounded-full text-xs font-medium">
+            Избранное
+        </span>
+        {{ end }}
+    </div>
+    
+    <!-- Заголовок -->
+    <h3 class="text-xl font-bold text-stone-100 mb-3 group-hover:text-amber-400 transition-colors">
+        {{ $case.Title }}
+    </h3>
+    
+    <!-- Клиент (если есть) -->
+    {{ with $case.Params.client }}
+    <p class="text-stone-400 text-sm mb-4">
+        Клиент: {{ . }}
+    </p>
+    {{ end }}
+    
+    <!-- Метрики: период и результат -->
+    <div class="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-stone-700">
+        {{ with $case.Params.period }}
+        <div>
+            <p class="text-stone-500 text-xs mb-1">Период</p>
+            <p class="text-stone-300 text-sm font-medium">{{ . }}</p>
+        </div>
+        {{ end }}
+        {{ with $case.Params.results }}
+        <div>
+            <p class="text-stone-500 text-xs mb-1">Результат</p>
+            <p class="text-emerald-400 text-sm font-medium">{{ . }}</p>
+        </div>
+        {{ end }}
+    </div>
+    
+</a>

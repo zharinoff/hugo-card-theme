@@ -1,74 +1,7 @@
-{{- $page := . -}}
+{{- $services := .Pages -}}
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {{ range $page.Pages }}
-    <article class="bg-stone-900 rounded-xl border border-stone-700 p-6 hover:border-amber-500/30 transition-all hover:shadow-xl">
-        
-        <h2 class="text-xl md:text-2xl font-bold text-stone-100 mb-4">
-            <a href="{{ .RelPermalink }}" class="hover:text-amber-400 transition-colors">
-                {{ .Title }}
-            </a>
-        </h2>
-        
-        {{ with .Params.subtitle }}
-        <p class="text-stone-400 mb-4">{{ . }}</p>
-        {{ end }}
-        
-        {{ if or .Params.price .Params.duration }}
-        <div class="space-y-3 mb-6">
-            {{ with .Params.price }}
-            <div>
-                <p class="text-stone-500 text-sm">Стоимость</p>
-                <p class="text-emerald-400 font-bold text-lg">{{ . }}</p>
-            </div>
-            {{ end }}
-            
-            {{ with .Params.duration }}
-            <div>
-                <p class="text-stone-500 text-sm">Срок выполнения</p>
-                <p class="text-stone-300 font-medium">{{ . }}</p>
-            </div>
-            {{ end }}
-        </div>
-        {{ end }}
-        
-        {{ with .Summary }}
-        <p class="text-stone-500 text-sm mb-6 line-clamp-3">
-            {{ . | plainify | truncate 100 }}
-        </p>
-        {{ end }}
-        
-        <div class="flex justify-between items-center">
-            <a 
-                href="{{ .RelPermalink }}" 
-                class="text-amber-400 hover:text-amber-300 font-medium text-sm"
-            >
-                Подробнее →
-            </a>
-        </div>
-        
-    </article>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {{ range $services }}
+    {{ partial "services/card.html" . }}
     {{ end }}
 </div>
-
-{{ if gt $page.Paginator.TotalPages 1 }}
-<div class="mt-12 pt-8 border-t border-stone-700">
-    <nav class="flex justify-center space-x-4">
-        {{ if $page.Paginator.HasPrev }}
-        <a href="{{ $page.Paginator.Prev.URL }}" class="text-stone-400 hover:text-amber-400">
-            ← Назад
-        </a>
-        {{ end }}
-        
-        <span class="text-stone-500">
-            Страница {{ $page.Paginator.PageNumber }} из {{ $page.Paginator.TotalPages }}
-        </span>
-        
-        {{ if $page.Paginator.HasNext }}
-        <a href="{{ $page.Paginator.Next.URL }}" class="text-stone-400 hover:text-amber-400">
-            Вперёд →
-        </a>
-        {{ end }}
-    </nav>
-</div>
-{{ end }}
