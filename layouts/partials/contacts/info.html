@@ -1,0 +1,86 @@
+{{- $site := .Site -}}
+
+<div class="bg-stone-900 rounded-xl border border-stone-600 p-8">
+    <h2 class="text-2xl md:text-3xl font-bold text-stone-100 mb-6">
+        Свяжитесь со мной
+    </h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Email -->
+        <div class="flex items-start">
+            <div class="mr-4 flex-shrink-0">
+                <img src="/images/icons/email.webp" alt="Email" class="w-6 h-6">
+            </div>
+            <div>
+                <p class="text-stone-400 text-sm mb-1">Email</p>
+                <a href="mailto:{{ $site.Params.email }}" 
+                   class="text-stone-100 hover:text-amber-400 transition-colors text-lg font-medium">
+                    {{ $site.Params.email }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- Телефон -->
+        <div class="flex items-start">
+            <div class="mr-4 flex-shrink-0">
+                <img src="/images/icons/phone.webp" alt="Телефон" class="w-6 h-6">
+            </div>
+            <div>
+                <p class="text-stone-400 text-sm mb-1">Телефон</p>
+                <a href="tel:{{ $site.Params.phone }}" 
+                   class="text-stone-100 hover:text-amber-400 transition-colors text-lg font-medium">
+                    {{ $site.Params.phone }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- Telegram -->
+        <div class="flex items-start">
+            <div class="mr-4 flex-shrink-0">
+                <img src="/images/icons/telegram.webp" alt="Telegram" class="w-6 h-6">
+            </div>
+            <div>
+                <p class="text-stone-400 text-sm mb-1">Telegram</p>
+                <a href="https://t.me/{{ $site.Params.telegram }}" 
+                   target="_blank" 
+                   class="text-stone-100 hover:text-amber-400 transition-colors text-lg font-medium">
+                    @{{ $site.Params.telegram }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- VK -->
+        <div class="flex items-start">
+            <div class="mr-4 flex-shrink-0">
+                <img src="/images/icons/vk.webp" alt="VK" class="w-6 h-6">
+            </div>
+            <div>
+                <p class="text-stone-400 text-sm mb-1">VK</p>
+                <a href="https://vk.com/{{ $site.Params.vk }}" 
+                   target="_blank" 
+                   class="text-stone-100 hover:text-amber-400 transition-colors text-lg font-medium">
+                    vk.com/{{ $site.Params.vk }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- GitHub (опционально) -->
+        {{ with $site.Params.github }}
+        <div class="flex items-start">
+            <div class="mr-4 flex-shrink-0">
+                <img src="/images/icons/github.webp" alt="GitHub" class="w-6 h-6">
+            </div>
+            <div>
+                <p class="text-stone-400 text-sm mb-1">GitHub</p>
+                <a href="https://github.com/{{ . }}" 
+                   target="_blank" 
+                   class="text-stone-100 hover:text-amber-400 transition-colors text-lg font-medium">
+                    @{{ . }}
+                </a>
+            </div>
+        </div>
+        {{ end }}
+        
+    </div>
+</div>

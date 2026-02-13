@@ -1,0 +1,10 @@
+{{- $page := . -}}
+
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-100 mb-4">
+        {{ $page.Title }}
+    </h1>
+    {{ with $page.Description }}
+    <p class="text-xl text-stone-300">{{ . }}</p>
+    {{ end }}
+</div>

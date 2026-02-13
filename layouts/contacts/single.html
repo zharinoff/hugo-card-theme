@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="bg-stone-800 min-h-screen">
+    
+    <!-- ГЕРОЙ -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                {{ partial "contacts/hero.html" . }}
+            </div>
+        </div>
+    </section>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <section class="bg-stone-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto space-y-12">
+                
+                {{ partial "contacts/info.html" . }}
+                
+                {{ with .Params.map_image }}
+                {{ partial "contacts/map.html" (dict 
+                    "image" . 
+                    "link" $.Params.map_link
+                    "caption" $.Params.map_caption
+                ) }}
+                {{ end }}
+                
+                {{ with .Content }}
+                <div class="prose prose-lg prose-invert max-w-none">
+                    <div class="text-stone-300 leading-relaxed">
+                        {{ . }}
+                    </div>
+                </div>
+                {{ end }}
+                
+                {{ with .Params.gallery }}
+                {{ partial "gallery.html" (dict 
+                    "photos" . 
+                    "title" "Фотографии офиса"
+                ) }}
+                {{ end }}
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    {{ partial "cta.html" (dict
+        "title" "Остались вопросы?"
+        "description" "Напишите мне — я отвечу в ближайшее время"
+        "primaryCTA" (dict "text" "Задать вопрос" "url" ("/contact/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+
+</div>
+{{ end }}
