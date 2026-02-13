@@ -7,7 +7,14 @@ readingTime = true
 
 # Изображения для поста
 [[images]]
-src = "/images/blog/cover.jpg"
+src = "images/blog/cover.jpg"
 alt = "Обложка поста"
 +++
 
+# Заголовок поста
+
+Тут какой-то текст
+
+## Подзаголовок поста
+
+Разметка в Markdown

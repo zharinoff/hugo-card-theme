@@ -17,12 +17,12 @@ features = [
 [[process]]
   step = "1"
   title = "Обсуждаем задачу"
-  description = "..."
+  description = "Описание шага"
 
 [[process]]
   step = "2"
   title = "Заключаем договор"
-  description = "..."
+  description = "Описание шага"
 
 # FAQ (массив объектов)
 [[faq]]
