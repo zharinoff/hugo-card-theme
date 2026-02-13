@@ -1,0 +1,40 @@
+{{ define "main" }}
+<div class="bg-stone-800 min-h-screen">
+    
+    <!-- ГЕРОЙ -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                {{ partial "blog/hero-list.html" . }}
+            </div>
+        </div>
+    </section>
+
+    <!-- СПИСОК ПОСТОВ -->
+    <section class="bg-stone-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {{ range .Paginator.Pages }}
+                    {{ partial "blog/card.html" . }}
+                    {{ end }}
+                </div>
+                
+                <!-- ПАГИНАЦИЯ -->
+                {{ partial "blog/pagination.html" . }}
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    {{ partial "cta.html" (dict
+        "title" "Хотите обсудить проект?"
+        "description" "Напишите мне — отвечу в ближайшее время"
+        "primaryCTA" (dict "text" "Связаться" "url" ("/contact/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+
+</div>
+{{ end }}

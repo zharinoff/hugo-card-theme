@@ -1,0 +1,58 @@
+{{- $post := . -}}
+
+<article class="bg-stone-800 rounded-xl border border-stone-600 p-6 hover:border-amber-500 transition-colors flex flex-col h-full">
+    
+    <!-- Обложка -->
+    {{ with $post.Params.cover }}
+    <a href="{{ $post.RelPermalink }}" class="block mb-4">
+        <img 
+            src="{{ . }}" 
+            alt="{{ $post.Params.cover_alt | default $post.Title }}"
+            class="w-full h-48 object-cover rounded-lg border border-stone-700"
+            loading="lazy"
+        >
+    </a>
+    {{ end }}
+    
+    <!-- Мета-информация -->
+    <div class="flex items-center gap-3 text-sm text-stone-400 mb-3">
+        <time datetime="{{ $post.Date.Format "2006-01-02" }}">
+            {{ $post.Date.Format "2 Jan 2006" }}
+        </time>
+        {{ with $post.Params.readingTime }}
+        <span>•</span>
+        <span>{{ $post.ReadingTime }} мин чтения</span>
+        {{ end }}
+    </div>
+    
+    <!-- Заголовок -->
+    <h2 class="text-xl font-bold text-stone-100 mb-3">
+        <a href="{{ $post.RelPermalink }}" class="hover:text-amber-400 transition-colors">
+            {{ $post.Title }}
+        </a>
+    </h2>
+    
+    <!-- Описание -->
+    {{ with $post.Description }}
+    <p class="text-stone-400 mb-4 line-clamp-3">
+        {{ . }}
+    </p>
+    {{ end }}
+    
+    <!-- Теги (первые 2) -->
+    {{ with $post.Params.tags }}
+    <div class="flex flex-wrap gap-2 mt-auto pt-4">
+        {{ range first 2 . }}
+        <span class="text-xs bg-stone-700 text-stone-300 px-3 py-1 rounded-full">
+            #{{ . }}
+        </span>
+        {{ end }}
+        {{ if gt (len .) 2 }}
+        <span class="text-xs bg-stone-700 text-stone-300 px-3 py-1 rounded-full">
+            +{{ sub (len .) 2 }}
+        </span>
+        {{ end }}
+    </div>
+    {{ end }}
+    
+</article>

@@ -1,0 +1,39 @@
+{{- $post := . -}}
+
+<div class="bg-stone-800 rounded-xl border border-stone-600 p-8">
+    
+    <!-- Теги -->
+    {{ with $post.Params.tags }}
+    <div class="mb-6">
+        <h3 class="text-lg font-semibold text-stone-200 mb-3">Теги</h3>
+        <div class="flex flex-wrap gap-2">
+            {{ range . }}
+            <a 
+                href="{{ "tags/" | relURL }}{{ . | urlize }}" 
+                class="bg-stone-700 hover:bg-stone-600 text-stone-300 px-4 py-2 rounded-lg text-sm transition-colors"
+            >
+                #{{ . }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+    
+    <!-- Категории -->
+    {{ with $post.Params.categories }}
+    <div>
+        <h3 class="text-lg font-semibold text-stone-200 mb-3">Категории</h3>
+        <div class="flex flex-wrap gap-2">
+            {{ range . }}
+            <a 
+                href="{{ "categories/" | relURL }}{{ . | urlize }}" 
+                class="bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 px-4 py-2 rounded-lg text-sm transition-colors border border-amber-500/20"
+            >
+                {{ . }}
+            </a>
+            {{ end }}
+        </div>
+    </div>
+    {{ end }}
+    
+</div>

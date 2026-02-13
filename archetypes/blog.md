@@ -1,20 +1,37 @@
-title = "{{ .Name | humanize | title }}"
++++
+title = "{{ replace .Name "-" " " | title }}"
 date = {{ .Date }}
-description = "Краткое описание поста"
+draft = true
+description = "Краткое описание поста для превью и SEO"
 author = "Автор"
-tags = ["тег1", "тег2"]
+tags = []
+categories = []
 readingTime = true
 
-# Изображения для поста
-[[images]]
-src = "images/blog/cover.jpg"
-alt = "Обложка поста"
+# Обложка поста (для карточек, шаринга)
+cover = "images/blog/cover.jpg"
+cover_alt = "Описание обложки"
+
+# Галерея изображений внутри поста
+[[gallery]]
+src = "images/blog/photo1.jpg"
+alt = "Описание фото 1"
+caption = "Подпись к фото (опционально)"
+
+[[gallery]]
+src = "images/blog/photo2.jpg"
+alt = "Описание фото 2"
+caption = "Подпись к фото (опционально)"
 +++
 
-# Заголовок поста
+# {{ replace .Name "-" " " | title }}
 
-Тут какой-то текст
+Введение — кратко о чём пост.
 
-## Подзаголовок поста
+## Основная часть
 
-Разметка в Markdown
+Тут какой-то текст в Markdown.
+
+## Заключение
+
+Выводы и призыв к действию (опционально).

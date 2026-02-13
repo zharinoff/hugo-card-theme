@@ -1,0 +1,14 @@
+{{- $page := . -}}
+
+<div class="max-w-4xl mx-auto text-center">
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-stone-100 mb-4">
+        {{ $page.Title | default "Блог" }}
+    </h1>
+    {{ with $page.Description }}
+    <p class="text-xl text-stone-300">{{ . }}</p>
+    {{ else }}
+    <p class="text-xl text-stone-300">
+        Статьи о разработке, дизайне и управлении проектами
+    </p>
+    {{ end }}
+</div>

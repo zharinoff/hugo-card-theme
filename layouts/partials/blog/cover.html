@@ -1,0 +1,13 @@
+{{- $image := .image -}}
+{{- $alt := .alt | default "Обложка поста" -}}
+
+{{ with $image }}
+<figure class="mb-8">
+    <img 
+        src="{{ . }}" 
+        alt="{{ $alt }}"
+        class="rounded-xl w-full h-auto border border-stone-600"
+        loading="lazy"
+    >
+</figure>
+{{ end }}

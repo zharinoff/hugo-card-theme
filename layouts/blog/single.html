@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div class="bg-stone-800 min-h-screen">
+    
+    <!-- ГЕРОЙ ПОСТА -->
+    <section class="py-12 md:py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                {{ partial "blog/hero-single.html" . }}
+            </div>
+        </div>
+    </section>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <section class="bg-stone-700 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto space-y-12">
+                
+                <!-- Обложка (если есть и не выведена в hero) -->
+                {{ with .Params.cover }}
+                {{ partial "blog/cover.html" (dict 
+                    "image" . 
+                    "alt" $.Params.cover_alt
+                ) }}
+                {{ end }}
+                
+                <!-- Контент поста -->
+                {{ partial "blog/content.html" . }}
+                
+                <!-- Галерея (если есть) -->
+                {{ with .Params.gallery }}
+                {{ partial "gallery.html" (dict 
+                    "photos" . 
+                    "title" "Фотографии к посту"
+                ) }}
+                {{ end }}
+                
+                <!-- Мета-информация (теги, категории, шаринг) -->
+                {{ partial "blog/meta.html" . }}
+                
+                <!-- Навигация: предыдущий/следующий пост -->
+                {{ partial "blog/navigation.html" . }}
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    {{ partial "cta.html" (dict
+        "title" "Понравилась статья?"
+        "description" "Подпишитесь, чтобы не пропустить новые посты"
+        "primaryCTA" (dict "text" "Перейти в блог" "url" ("blog/" | relURL))
+        "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
+    ) }}
+
+</div>
+{{ end }}
