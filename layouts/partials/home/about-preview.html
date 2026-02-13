@@ -2,29 +2,68 @@
 {{- if $about -}}
 <section class="bg-stone-700 py-16">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 gap-12 items-center">
-            <div>
-                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-6 text-center">
-                    {{- $about.Title -}}
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Заголовок секции -->
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">
+                    {{ $about.Title }}
                 </h2>
-                <div class="text-stone-300">
-                    {{- $about.Content | plainify | truncate 300 -}}
-                </div>
-                {{- if $about.Params.experience -}}
-                <div class="mt-6">
-                    <p class="text-stone-400 mb-2">Опыт работы</p>
-                    <p class="text-2xl font-bold text-emerald-400">{{ $about.Params.experience }}</p>
-                </div>
-                {{- end -}}
-                <div class="mt-8 text-center">
-                    <a 
-                        href="{{ $about.RelPermalink }}" 
-                        class="inline-block text-amber-400 hover:text-amber-300 font-medium text-center"
-                    >
-                        Подробнее обо мне
-                    </a>
+                <p class="text-lg text-stone-300">
+                    Кратко о том, кто я и как работаю
+                </p>
+            </div>
+            
+            <!-- Карточка с контентом -->
+            <div class="bg-stone-800 rounded-xl border border-stone-600 p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Аватар (если есть) -->
+                    {{ with $about.Params.avatar }}
+                    <div class="md:col-span-1">
+                        <img 
+                            src="{{ . }}" 
+                            alt="Фото автора" 
+                            class="rounded-xl w-full h-auto border border-stone-600"
+                            loading="lazy"
+                        >
+                    </div>
+                    {{ end }}
+                    
+                    <!-- Контент и опыт -->
+                    <div class="{{ with $about.Params.avatar }}md:col-span-2{{ else }}md:col-span-3{{ end }}">
+                        <!-- Текст с форматированием -->
+                        <div class="prose prose-invert prose-lg max-w-none">
+                            <div class="text-stone-300 leading-relaxed">
+                                {{ $about.Content | markdownify | truncate 400 }}
+                            </div>
+                        </div>
+                        
+                        <!-- Опыт работы (карточка) -->
+                        {{ with $about.Params.experience }}
+                        <div class="mt-6 bg-stone-900 rounded-lg p-5 border border-stone-600 inline-block">
+                            <p class="text-stone-400 text-sm mb-1">Опыт работы</p>
+                            <p class="text-2xl font-bold text-amber-400">{{ . }}</p>
+                        </div>
+                        {{ end }}
+                        
+                        <!-- Ссылка на полную версию -->
+                        <div class="mt-8">
+                            <a 
+                                href="{{ $about.RelPermalink }}" 
+                                class="inline-flex items-center text-amber-400 hover:text-amber-300 font-medium transition-colors"
+                            >
+                                Подробнее обо мне
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
+            
         </div>
     </div>
 </section>

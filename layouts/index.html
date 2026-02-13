@@ -1,5 +1,6 @@
 {{ define "main" }}
-<div class="bg-stone-800">
+<div class="bg-stone-800 min-h-screen">
+    
     {{ partial "home/hero.html" (dict
         "title" .Site.Title
         "description" (.Site.Params.description | default "Дефолтное описание сайта")
@@ -21,5 +22,6 @@
         "primaryCTA" (dict "text" "Оставить заявку" "url" ("contacts/" | relURL))
         "secondaryCTA" (dict "text" "Написать в Telegram" "url" (printf "https://t.me/%s" .Site.Params.telegram))
     ) }}
+    
 </div>
 {{ end }}
