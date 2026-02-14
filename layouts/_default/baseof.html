@@ -37,30 +37,30 @@
     
     {{- partial "footer.html" . -}}
     
-    {{- with .Site.Params.telegram -}}
-    <div class="fixed bottom-6 right-6 z-50">
-        <a 
-            href="https://t.me/{{ . }}" 
-            target="_blank"
-            class="
-                flex items-center justify-center
-                w-14 h-14
-                bg-gradient-to-br from-amber-500 to-amber-600
-                hover:from-amber-600 hover:to-amber-700
-                text-stone-900
-                rounded-full
-                shadow-lg shadow-stone-900/50
-                transition-all duration-300
-                hover:scale-110 hover:shadow-xl
-                focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-stone-800
-            "
-            aria-label="Написать в Telegram"
-        >
-            <span class="text-2xl font-bold tracking-tight">T</span>
-        </a>
-    </div>
-    {{- end -}}
-    
+   {{- with .Site.Params.telegram -}}
+   <div class="fixed bottom-6 right-6 z-50">
+     <a 
+        href="https://t.me/{{ . }}" 
+        target="_blank"
+        class="
+            flex items-center justify-center
+            w-14 h-14
+            bg-gradient-to-br from-amber-500 to-amber-600
+            hover:from-amber-600 hover:to-amber-700
+            text-stone-900
+            rounded-full
+            shadow-lg shadow-stone-900/50
+            transition-all duration-300
+            hover:scale-110 hover:shadow-xl
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-800
+        "
+        aria-label="Написать в Telegram"
+     >
+         <span class="text-2xl font-bold tracking-tight">T</span>
+     </a>
+   </div>
+   {{- end -}}
+
     {{- block "scripts" . -}}{{- end -}}
 </body>
 </html>
